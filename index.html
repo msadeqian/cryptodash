@@ -14,6 +14,21 @@
         background-color: #121212; /* Dark background for the entire page */
         color: #ffffff; /* Light text color */
       }
+
+      .marquee-tgju,
+      .tgju-widget {
+        width: 100%;
+      }
+
+      div:has(> .tgju-widget) {
+        width: 100%;
+      }
+
+      .js-copyright-label,
+      .tgju-copyright,
+      .tgju-copyright-fix {
+        display: none !important;
+      }
       .container-fluid {
         height: 100%;
       }
@@ -345,7 +360,7 @@
         </div>
       </div>
       <div class="row" style="height: 8%">
-        <div class="col-12 grid-cell">
+        <div class="col-12 grid-cell p-0">
           <tgju
             type="ticker-tap"
             items="137121,534672,534671,137203,137138,137137"
@@ -353,11 +368,13 @@
             speed="35"
             token="webservice"
             styles='{
-                  "background": "#292727",
+                  "background": "#1e1e1e",
+                  "border": "#1e1e1e",
                   "title": "#ffffff",
+                  "hover": "#333",
                   "price": "#ffffff",
-                  "copyright_fix": "#292727",
-                  "copyright_fix_text": "#292727"
+                  "copyright_fix": "#1e1e1e",
+                  "copyright_fix_text": "#1e1e1e"
                 }'
           ></tgju>
           <script src="https://api.tgju.org/v1/widget/v2" defer></script>
