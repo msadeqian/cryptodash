@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Dark Theme</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background-color: #121212; /* Dark background for the entire page */
+        color: #ffffff; /* Light text color */
+      }
+      .container-fluid {
+        height: 100%;
+      }
+      .row {
+        height: 25%; /* Each row takes 25% of the page height */
+      }
+      .row2 {
+        height: 50%; /* Each row takes 25% of the page height */
+      }
+      .grid-cell {
+        border: 1px solid #333; /* Darker border for grid cells */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #1e1e1e; /* Dark background for grid cells */
+        color: #ffffff; /* Light text color */
+      }
+      .grid-cell:hover {
+        background-color: #333; /* Slightly lighter background on hover */
+      }
+      .merged-cell {
+        grid-row: 2 / 5; /* Span from row 2 to row 5 (rows 2, 3, and 4) */
+        grid-column: 4 / 5; /* Span column 4 */
+        background-color: #4a148c; /* Different background color for merged cell */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Floating Button Styles */
+      .floating-button {
+        position: fixed;
+        bottom: 15px;
+        left: 15px;
+        width: 45px;
+        height: 45px;
+        background-color: #0040ff;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        transition: all 0.3s ease;
+        z-index: 1000;
+      }
+      .floating-button.expanded {
+        width: 60%; /* 60% of page width */
+        height: 50%; /* 50% of page height */
+        border-radius: 10px;
+      }
+      .floating-button.expanded .button-content {
+        display: block;
+      }
+      .button-content {
+        display: none;
+        padding: 0px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <!-- Row 1 -->
+      <div class="row">
+        <div class="col-3 grid-cell">
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                {
+                "symbol": "CRYPTOCAP:TOTAL",
+                "width": "100%",
+                "height": "100%",
+                "locale": "en",
+                "dateRange": "3M",
+                "colorTheme": "dark",
+                "isTransparent": true,
+                "autosize": true,
+                "largeChartUrl": "",
+                "noTimeScale": false
+              }
+            </script>
+          </div>
+          <!-- TradingView Widget END -->
+        </div>
+        <div class="col-3 grid-cell">
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                {
+                "symbol": "CRYPTOCAP:TOTAL2",
+                "width": "100%",
+                "height": "100%",
+                "locale": "en",
+                "dateRange": "3M",
+                "colorTheme": "dark",
+                "isTransparent": true,
+                "autosize": true,
+                "largeChartUrl": "",
+                "noTimeScale": false
+              }
+            </script>
+          </div>
+          <!-- TradingView Widget END -->
+        </div>
+        <div class="col-3 grid-cell">
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                {
+                "symbol": "CRYPTOCAP:USDT.D",
+                "width": "100%",
+                "height": "100%",
+                "locale": "en",
+                "dateRange": "3M",
+                "colorTheme": "dark",
+                "isTransparent": true,
+                "autosize": true,
+                "largeChartUrl": "",
+                "noTimeScale": false
+              }
+            </script>
+          </div>
+          <!-- TradingView Widget END -->
+        </div>
+        <div class="col-3 grid-cell">
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                {
+                "symbol": "CRYPTOCAP:BTC.D",
+                "width": "100%",
+                "height": "100%",
+                "locale": "en",
+                "dateRange": "3M",
+                "colorTheme": "dark",
+                "isTransparent": true,
+                "autosize": true,
+                "largeChartUrl": "",
+                "noTimeScale": false
+              }
+            </script>
+          </div>
+          <!-- TradingView Widget END -->
+        </div>
+      </div>
+      <!-- Row 2 -->
+      <div class="row">
+        <div class="col-3 grid-cell">
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                {
+                "symbol": "BINANCE:BTCUSDT",
+                "width": "100%",
+                "height": "100%",
+                "locale": "en",
+                "dateRange": "3M",
+                "colorTheme": "dark",
+                "isTransparent": true,
+                "autosize": true,
+                "largeChartUrl": "",
+                "noTimeScale": false
+              }
+            </script>
+          </div>
+          <!-- TradingView Widget END -->
+        </div>
+        <div class="col-3 grid-cell">
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                {
+                "symbol": "BINANCE:ETHUSDT",
+                "width": "100%",
+                "height": "100%",
+                "locale": "en",
+                "dateRange": "3M",
+                "colorTheme": "dark",
+                "isTransparent": true,
+                "autosize": true,
+                "largeChartUrl": "",
+                "noTimeScale": false
+              }
+            </script>
+          </div>
+          <!-- TradingView Widget END -->
+        </div>
+        <div class="col-6 grid-cell">
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+                {
+                "symbols": [
+                  [
+                    "BINANCE:XRPUSDT|1M"
+                  ],
+                  [
+                    "BINANCE:SOLUSDT|1M"
+                  ],
+                  [
+                    "BINANCE:DOGEUSDT|1M"
+                  ],
+                  [
+                    "BINANCE:ADAUSDT|1M"
+                  ],
+                  [
+                    "BINANCE:AVAXUSDT|1M"
+                  ],
+                  [
+                    "BINANCE:AAVEUSDT|1M"
+                  ]
+                ],
+                "chartOnly": false,
+                "width": "100%",
+                "height": "100%",
+                "locale": "en",
+                "colorTheme": "dark",
+                "autosize": true,
+                "showVolume": true,
+                "showMA": false,
+                "hideDateRanges": false,
+                "hideMarketStatus": false,
+                "hideSymbolLogo": false,
+                "scalePosition": "right",
+                "scaleMode": "Normal",
+                "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
+                "fontSize": "10",
+                "noTimeScale": false,
+                "valuesTracking": "1",
+                "changeMode": "price-and-percent",
+                "chartType": "area",
+                "headerFontSize": "medium",
+                "gridLineColor": "rgba(242, 242, 242, 0.12)",
+                "backgroundColor": "rgba(26, 26, 26, 0)",
+                "lineWidth": 2,
+                "lineType": 0,
+                "dateRanges": [
+                  "1d|1",
+                  "1m|30",
+                  "all|1M"
+                ],
+                "dateFormat": "yyyy-MM-dd",
+                "upColor": "#22ab94",
+                "downColor": "#f7525f",
+                "borderUpColor": "#22ab94",
+                "borderDownColor": "#f7525f",
+                "wickUpColor": "#22ab94",
+                "wickDownColor": "#f7525f"
+              }
+            </script>
+          </div>
+          <!-- TradingView Widget END -->
+        </div>
+        <!-- <div class="col-3 grid-cell"></div> -->
+      </div>
+      <div class="row row2">
+        <div class="col-6 grid-cell p-0">
+          <div class="container-fluid m-0">
+            <div class="row row2">
+              <div class="col-6 grid-cell">
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container">
+                  <div class="tradingview-widget-container__widget"></div>
+                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
+                      {
+                      "interval": "1h",
+                      "width": "100%",
+                      "isTransparent": true,
+                      "height": "100%",
+                      "symbol": "BINANCE:BTCUSDT",
+                      "showIntervalTabs": false,
+                      "displayMode": "single",
+                      "locale": "en",
+                      "colorTheme": "dark"
+                    }
+                  </script>
+                </div>
+                <!-- TradingView Widget END -->
+              </div>
+              <div class="col-6 grid-cell">
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container">
+                  <div class="tradingview-widget-container__widget"></div>
+                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
+                      {
+                      "interval": "1h",
+                      "width": "100%",
+                      "isTransparent": true,
+                      "height": "100%",
+                      "symbol": "BINANCE:ETCUSDT",
+                      "showIntervalTabs": false,
+                      "displayMode": "single",
+                      "locale": "en",
+                      "colorTheme": "dark"
+                    }
+                  </script>
+                </div>
+                <!-- TradingView Widget END -->
+              </div>
+            </div>
+            <div class="row row2">
+              <div class="col-12 grid-cell">
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container">
+                  <div class="tradingview-widget-container__widget"></div>
+                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
+                      {
+                      "feedMode": "market",
+                      "market": "crypto",
+                      "isTransparent": true,
+                      "displayMode": "regular",
+                      "width": "100%",
+                      "height": "100%",
+                      "colorTheme": "dark",
+                      "locale": "en"
+                    }
+                  </script>
+                </div>
+                <!-- TradingView Widget END -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 grid-cell p-0">
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container" style="height: 100%; width: 100%">
+            <div class="tradingview-widget-container__widget" style="height: calc(100% - 32px); width: 100%"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                {
+                "width": "100%",
+                "height": "100%",
+                "symbol": "BINANCE:BTCUSDT",
+                "interval": "D",
+                "timezone": "Asia/Tehran",
+                "theme": "dark",
+                "style": "1",
+                "locale": "en",
+                "allow_symbol_change": true,
+                "calendar": false,
+                "studies": [
+                  "STD;RSI"
+                ],
+                "support_host": "https://www.tradingview.com"
+              }
+            </script>
+          </div>
+          <!-- TradingView Widget END -->
+        </div>
+      </div>
+    </div>
+
+    <button class="floating-button p-0" id="floatingButton">
+      <span class="button-icon"></span>
+      <div class="button-content p-0 w-100 container-fluid">
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+              {
+              "width": "100%",
+              "height": "100%",
+              "defaultColumn": "oscillators",
+              "screener_type": "crypto_mkt",
+              "displayCurrency": "USD",
+              "colorTheme": "dark",
+              "locale": "en",
+              "isTransparent": false
+            }
+          </script>
+        </div>
+        <!-- TradingView Widget END -->
+      </div>
+    </button>
+
+    <!-- JavaScript for Floating Button -->
+    <script>
+      const floatingButton = document.getElementById("floatingButton");
+
+      // Expand the button on click
+      floatingButton.addEventListener("click", () => {
+        floatingButton.classList.add("expanded");
+      });
+
+      // Minimize the button when mouse leaves the expanded area
+      floatingButton.addEventListener("mouseleave", () => {
+        if (floatingButton.classList.contains("expanded")) {
+          floatingButton.classList.remove("expanded");
+        }
+      });
+    </script>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>
