@@ -214,17 +214,18 @@
           <!-- TradingView Widget BEGIN -->
           <div class="tradingview-widget-container">
             <div class="tradingview-widget-container__widget"></div>
-            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
                 {
-                "interval": "1h",
+                "symbol": "FOREXCOM:XAUUSD",
                 "width": "100%",
-                "isTransparent": true,
                 "height": "100%",
-                "symbol": "BINANCE:BTCUSDT",
-                "showIntervalTabs": false,
-                "displayMode": "single",
                 "locale": "en",
-                "colorTheme": "dark"
+                "dateRange": "3M",
+                "colorTheme": "dark",
+                "isTransparent": true,
+                "autosize": true,
+                "largeChartUrl": "",
+                "noTimeScale": false
               }
             </script>
           </div>
@@ -240,7 +241,7 @@
                 "width": "100%",
                 "isTransparent": true,
                 "height": "100%",
-                "symbol": "BINANCE:ETCUSDT",
+                "symbol": "BINANCE:BTCUSDT",
                 "showIntervalTabs": false,
                 "displayMode": "single",
                 "locale": "en",
