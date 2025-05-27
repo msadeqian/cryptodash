@@ -235,7 +235,7 @@
                 "width": "100%",
                 "height": "100%",
                 "locale": "en",
-                "dateRange": "3M",
+                "dateRange": "1M",
                 "colorTheme": "dark",
                 "isTransparent": true,
                 "autosize": true,
@@ -247,7 +247,7 @@
           <!-- TradingView Widget END -->
         </div>
         <div class="col-3 grid-cell">
-          <!-- TradingView Widget BEGIN -->
+          <!-- TradingView Widget BEGIN >
           <div class="tradingview-widget-container">
             <div class="tradingview-widget-container__widget"></div>
             <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
@@ -264,35 +264,9 @@
               }
             </script>
           </div>
-          <!-- TradingView Widget END -->
-        </div>
+          < TradingView Widget END -->
 
-        <!-- <div class="col-3 grid-cell"></div> -->
-      </div>
-      <div class="row row2">
-        <div class="col-6 grid-cell p-0">
-          <div class="container-fluid m-0">
-            <!-- TradingView Widget BEGIN -->
-            <div class="tradingview-widget-container">
-              <div class="tradingview-widget-container__widget"></div>
-              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
-                  {
-                  "width": "100%",
-                  "height": "100%",
-                  "defaultColumn": "performance",
-                  "screener_type": "crypto_mkt",
-                  "displayCurrency": "USD",
-                  "colorTheme": "dark",
-                  "locale": "en",
-                  "isTransparent": true
-                }
-              </script>
-            </div>
-            <!-- TradingView Widget END -->
-          </div>
-        </div>
-        <div class="col-6 grid-cell">
-          <!-- TradingView Widget BEGIN -->
+          <!-- TradingView Widget BEGIN 
           <div class="tradingview-widget-container">
             <div class="tradingview-widget-container__widget"></div>
             <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
@@ -353,6 +327,75 @@
                 "borderDownColor": "#f7525f",
                 "wickUpColor": "#22ab94",
                 "wickDownColor": "#f7525f"
+              }
+            </script>
+          </div>
+          < TradingView Widget END -->
+
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                {
+                "symbol": "FX:EURUSD",
+                "width": "100%",
+                "height": "100%",
+                "locale": "en",
+                "dateRange": "1M",
+                "colorTheme": "dark",
+                "isTransparent": true,
+                "autosize": true,
+                "largeChartUrl": "",
+                "noTimeScale": false
+              }
+            </script>
+          </div>
+          <!-- TradingView Widget END -->
+        </div>
+
+        <!-- <div class="col-3 grid-cell"></div> -->
+      </div>
+      <div class="row row2">
+        <div class="col-6 grid-cell p-0">
+          <div class="container-fluid m-0">
+            <!-- TradingView Widget BEGIN -->
+            <div class="tradingview-widget-container">
+              <div class="tradingview-widget-container__widget"></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+                  {
+                  "width": "100%",
+                  "height": "100%",
+                  "defaultColumn": "performance",
+                  "screener_type": "crypto_mkt",
+                  "displayCurrency": "USD",
+                  "colorTheme": "dark",
+                  "locale": "en",
+                  "isTransparent": true
+                }
+              </script>
+            </div>
+            <!-- TradingView Widget END -->
+          </div>
+        </div>
+        <div class="col-6 grid-cell">
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-crypto-coins-heatmap.js" async>
+                {
+                "dataSource": "CryptoWithoutStable",
+                "blockSize": "24h_vol_cmc",
+                "blockColor": "Perf.W",
+                "locale": "en",
+                "symbolUrl": "",
+                "colorTheme": "dark",
+                "hasTopBar": false,
+                "isDataSetEnabled": false,
+                "isZoomEnabled": true,
+                "hasSymbolTooltip": true,
+                "isMonoSize": true,
+                "width": "100%",
+                "height": "100%"
               }
             </script>
           </div>
