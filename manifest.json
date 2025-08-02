@@ -2,10 +2,17 @@
   "name": "Crypto Dashboard",
   "short_name": "CryptoDash",
   "start_url": "/cryptodash/index.html",
+  "scope": "/cryptodash/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
+  "orientation": "portrait",
   "icons": [
+    {
+      "src": "/cryptodash/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
     {
       "src": "/cryptodash/icon-192.png",
       "sizes": "192x192",

@@ -3,6 +3,8 @@ self.addEventListener('install', (event) => {
     caches.open('cryptodash-v1').then((cache) => {
       return cache.addAll([
         '/cryptodash/index.html',
+        '/cryptodash/icon-144.png',
+        '/cryptodash/icon-180.png',
         '/cryptodash/icon-192.png',
         '/cryptodash/icon-512.png'
         // Add other assets (CSS, JS, etc.) here if needed
