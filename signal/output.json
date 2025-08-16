@@ -1,0 +1,19 @@
+{
+  "data": [
+    { "datetime": 1755210600000, "symbol": "GRTUSDT", "signal": "SELL", "entry": 0.0933, "stop_loss": 0.1044, "take_profit": 0.0766, "url": "https://www.tradingview.com/chart?symbol=GRTUSDT" },
+    { "datetime": 1755210600000, "symbol": "HBARUSDT", "signal": "SELL", "entry": 0.24948, "stop_loss": 0.26765, "take_profit": 0.22222, "url": "https://www.tradingview.com/chart?symbol=HBARUSDT" },
+    { "datetime": 1755210600000, "symbol": "HMSTRUSDT", "signal": "SELL", "entry": 0.000733, "stop_loss": 0.000822, "take_profit": 0.0006, "url": "https://www.tradingview.com/chart?symbol=HMSTRUSDT" },
+    { "datetime": 1755210600000, "symbol": "HUMAUSDT", "signal": "SELL", "entry": 0.035, "stop_loss": null, "take_profit": null, "url": "https://www.tradingview.com/chart?symbol=HUMAUSDT" },
+    { "datetime": 1755210600000, "symbol": "IOSTUSDT", "signal": "SELL", "entry": 0.003617, "stop_loss": null, "take_profit": null, "url": "https://www.tradingview.com/chart?symbol=IOSTUSDT" },
+    { "datetime": 1755210600000, "symbol": "IOTXUSDT", "signal": "SELL", "entry": 0.02896, "stop_loss": null, "take_profit": null, "url": "https://www.tradingview.com/chart?symbol=IOTXUSDT" },
+    { "datetime": 1755210600000, "symbol": "JOEUSDT", "signal": "SELL", "entry": 0.1564, "stop_loss": 0.1724, "take_profit": 0.1324, "url": "https://www.tradingview.com/chart?symbol=JOEUSDT" },
+    { "datetime": 1755210600000, "symbol": "MBLUSDT", "signal": "SELL", "entry": 0.00224, "stop_loss": null, "take_profit": null, "url": "https://www.tradingview.com/chart?symbol=MBLUSDT" },
+    { "datetime": 1755210600000, "symbol": "MOVEUSDT", "signal": "SELL", "entry": 0.1342, "stop_loss": null, "take_profit": null, "url": "https://www.tradingview.com/chart?symbol=MOVEUSDT" },
+    { "datetime": 1755210600000, "symbol": "MTLUSDT", "signal": "SELL", "entry": 0.733, "stop_loss": 0.782, "take_profit": 0.66, "url": "https://www.tradingview.com/chart?symbol=MTLUSDT" },
+    { "datetime": 1755210600000, "symbol": "NFPUSDT", "signal": "SELL", "entry": 0.0691, "stop_loss": 0.078, "take_profit": 0.0557, "url": "https://www.tradingview.com/chart?symbol=NFPUSDT" },
+    { "datetime": 1755210600000, "symbol": "TAOUSDT", "signal": "SELL", "entry": 366.5, "stop_loss": null, "take_profit": null, "url": "https://www.tradingview.com/chart?symbol=TAOUSDT" },
+    { "datetime": 1755210600000, "symbol": "USUALUSDT", "signal": "SELL", "entry": 0.0733, "stop_loss": 0.0765, "take_profit": 0.0685, "url": "https://www.tradingview.com/chart?symbol=USUALUSDT" },
+    { "datetime": 1755210600000, "symbol": "WAXPUSDT", "signal": "SELL", "entry": 0.02072, "stop_loss": null, "take_profit": null, "url": "https://www.tradingview.com/chart?symbol=WAXPUSDT" },
+    { "datetime": 1755210600000, "symbol": "ZRXUSDT", "signal": "SELL", "entry": 0.2459, "stop_loss": 0.2734, "take_profit": 0.2047, "url": "https://www.tradingview.com/chart?symbol=ZRXUSDT" }
+  ]
+}
