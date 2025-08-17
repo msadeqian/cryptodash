@@ -33,9 +33,20 @@
         font-weight: bold;
         color: #0f0;
       }
+      .progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        background-color: #29d;
+        width: 0;
+        z-index: 1031;
+        transition: width 30s linear;
+      }
     </style>
   </head>
   <body>
+    <div class="progress-bar"></div>
     <div class="container py-4">
       <h2 class="mb-4 text-center">Crypto Signals Dashboard</h2>
       <div class="row mb-3 g-2">
@@ -156,6 +167,16 @@
           document.getElementById("cards").innerHTML = '<p class="text-center">Failed to load data. Check your internet connection.</p>';
         }
       }
+
+      // Progress bar
+      const progress = document.querySelector(".progress-bar");
+      function startProgress() {
+        progress.style.width = "0%";
+        progress.clientWidth; // reflow
+        progress.style.width = "100%";
+      }
+      startProgress();
+      setInterval(startProgress, 30000);
 
       document.getElementById("search").addEventListener("input", filterAndSort);
       document.getElementById("filterSignal").addEventListener("change", filterAndSort);
