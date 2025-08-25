@@ -1,11 +1,11 @@
-const cacheName = 'crypto-signals-v2';
+const cacheName = 'crypto-signals-v3';
 const assets = [
     './',
     './index.html',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'
 ];
-const JSON_URL = 'https://msadeqian.github.io/jd/sg.json';
+const JSON_URL = 'https://msadeqian.github.io/jd/sgtest.json';
 
 self.addEventListener('install', e=>{
     e.waitUntil(caches.open(cacheName).then(cache=>cache.addAll(assets)));
