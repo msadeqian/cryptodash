@@ -96,15 +96,15 @@
           const card = document.createElement("div");
           card.className = "col-sm-12 col-md-6 col-lg-4";
           card.innerHTML = `<div class="card bg-dark text-light p-3 mb-3">
-<h5>${d.symbol}</h5>
-<p class="card-text"><strong>Signal:</strong> ${d.signal}</p>
-<p class="card-text"><strong>Time:</strong> <small>${formatDate(d.datetime)}</small></p>
-<p class="card-text"><strong>Entry:</strong> ${d.entry}</p>
-<p class="card-text"><strong>Stop Loss:</strong> ${d.stop_loss ?? "N/A"}</p>
-<p class="card-text"><strong>Take Profit:</strong> ${d.take_profit ?? "N/A"}</p>
-<p class="card-text"><strong>Current Price:</strong> <span id="price-${d.symbol}" class="price">Loading...</span></p>
-<a href="${d.url}" target="_blank" class="btn btn-primary btn-sm mt-2">View Chart</a>
-</div>`;
+      <h5>${d.symbol}</h5>
+      <p class="card-text"><strong>Signal:</strong> ${d.signal}</p>
+      <p class="card-text"><strong>Time:</strong> <small>${formatDate(d.datetime)}</small></p>
+      <p class="card-text"><strong>Entry:</strong> ${d.entry}</p>
+      <p class="card-text"><strong>Stop Loss:</strong> ${d.stop_loss ?? "N/A"}</p>
+      <p class="card-text"><strong>Take Profit:</strong> ${d.take_profit ?? "N/A"}</p>
+      <p class="card-text"><strong>Current Price:</strong> <span id="price-${d.symbol}" class="price">Loading...</span></p>
+      <a href="${d.url}" target="_blank" class="btn btn-primary btn-sm mt-2">View Chart</a>
+      </div>`;
           cardsContainer.appendChild(card);
 
           // fetch and update live price
@@ -135,7 +135,7 @@
           return (s.symbol.toLowerCase().includes(searchQ) || s.signal.toLowerCase().includes(searchQ)) && (!signalFilter || s.signal === signalFilter);
         });
         if (sortBy) {
-          filtered.sort((a, b) => {
+          filtered.sort((b, a) => {
             if (sortBy === "datetime") return a.datetime - b.datetime;
             return a[sortBy] - b[sortBy];
           });
@@ -146,6 +146,10 @@
       // Load JSON data
       async function loadSignals() {
         try {
+          //const res = await fetch(`https://api.jsonbin.io/v3/b/68a573ceae596e708fceca34/latest`, {
+          //  headers: { "X-Access-Key": "$2a$10$fz0OW/4nVjESNsh8xdfEneimMU22LWatJ2gQcMBoCsYPjV3fGjGVC" },
+          //});
+
           const res = await fetch(JSON_URL);
           const json = await res.json();
           signalsData = json.data;
