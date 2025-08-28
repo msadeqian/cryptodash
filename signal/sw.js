@@ -1,4 +1,4 @@
-const cacheName = 'crypto-signals-v3';
+const cacheName = 'crypto-signals-v3.1';
 const assets = [
     './',
     './index.html',
