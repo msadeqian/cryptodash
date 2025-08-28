@@ -94,15 +94,16 @@
         cardsContainer.innerHTML = "";
         for (const d of data) {
           const card = document.createElement("div");
-          card.className = "col-sm-12 col-md-6 col-lg-4";
+          card.className = "col-sm-12 col-md-6 col-lg-3";
+          const symbolColor = d.signal === "BUY" ? "text-success" : d.signal === "SELL" ? "text-danger" : "text-light";
+
           card.innerHTML = `<div class="card bg-dark text-light p-3 mb-3">
-      <h5>${d.symbol}</h5>
-      <p class="card-text"><strong>Signal:</strong> ${d.signal}</p>
-      <p class="card-text"><strong>Time:</strong> <small>${formatDate(d.datetime)}</small></p>
-      <p class="card-text"><strong>Entry:</strong> ${d.entry}</p>
-      <p class="card-text"><strong>Stop Loss:</strong> ${d.stop_loss ?? "N/A"}</p>
-      <p class="card-text"><strong>Take Profit:</strong> ${d.take_profit ?? "N/A"}</p>
-      <p class="card-text"><strong>Current Price:</strong> <span id="price-${d.symbol}" class="price">Loading...</span></p>
+      <h5 class="${symbolColor}">${d.symbol}</h5>
+      <p class="card-text mb-1"><strong>Signal:</strong> ${d.signal}</p>
+      <p class="card-text mb-1"><strong>Time:</strong> <small>${formatDate(d.datetime)}</small></p>
+      <p class="card-text mb-1"><strong>Entry:</strong> ${d.entry}</p>      
+      <p class="card-text mb-1"><strong>Market Direction:</strong> ${d.Market_Direction}</p>
+      <p class="card-text mb-1"><strong>Current Price:</strong> <span id="price-${d.symbol}" class="price">Loading...</span></p>
       <a href="${d.url}" target="_blank" class="btn btn-primary btn-sm mt-2">View Chart</a>
       </div>`;
           cardsContainer.appendChild(card);
