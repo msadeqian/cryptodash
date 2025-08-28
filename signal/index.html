@@ -1,204 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Crypto Signals Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="manifest" href="manifest.json" />
-    <meta name="theme-color" content="#121212" />
-    <style>
-      body {
-        background-color: #121212;
-        color: #f1f1f1;
-        font-family: sans-serif;
-      }
-      .card {
-        margin-bottom: 1rem;
-        border-radius: 0.75rem;
-        transition: 0.3s;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-      }
-      .card:hover {
-        transform: scale(1.03);
-      }
-      input,
-      select {
-        margin: 0.5rem 0;
-      }
-      .card-text small {
-        color: #bbb;
-      }
-      .price {
-        font-weight: bold;
-        color: #0f0;
-      }
-      .progress-bar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 3px;
-        background-color: #29d;
-        width: 0;
-        z-index: 1031;
-        transition: width 30s linear;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="progress-bar"></div>
-    <div class="container py-4">
-      <h2 class="mb-4 text-center">Crypto Signals Dashboard</h2>
-      <div class="row mb-3 g-2">
-        <div class="col-md-4"><input type="text" id="search" class="form-control" placeholder="Search symbol or signal type..." /></div>
-        <div class="col-md-4">
-          <select id="filterSignal" class="form-select">
-            <option value="">All Signal Types</option>
-          </select>
-        </div>
-        <div class="col-md-4">
-          <select id="sortOption" class="form-select">
-            <option value="">Sort By</option>
-            <option value="datetime">Time</option>
-            <option value="entry">Entry Price</option>
-          </select>
-        </div>
-      </div>
-      <div id="cards" class="row"></div>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Crypto Signals Dashboard</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#121212" />
+<style>
+  body {
+    background-color: #121212;
+    color: #f1f1f1;
+    font-family: sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  body.light-theme {
+    background-color: #f9f9f9;
+    color: #121212;
+  }
+  .card {
+    margin-bottom: 1rem;
+    border-radius: 0.75rem;
+    transition: 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    border-left: 5px solid transparent;
+  }
+  .card:hover {
+    transform: scale(1.03);
+  }
+  .card-dark { background-color: #1c1c1c; color: #f1f1f1; }
+  .card-light { background-color: #f9f9f9; color: #121212; }
+  input, select { margin: 0.5rem 0; }
+  .card-text small { color: #bbb; }
+  .price { font-weight: bold; }
+  <!-- .badge-buy { background-color: #28a74679; color: #fff; margin-left: 0.5rem;  }
+  .badge-sell { background-color: #dc354681; color: #fff; margin-left: 0.5rem; } -->
+
+.badge-buy {
+  background: linear-gradient(to bottom, rgba(40, 167, 70, 0) 0%, rgba(40, 167, 70, 0.3) 30%);
+  color: #fff;
+  margin-left: 0.5rem;
+}
+
+.badge-sell {
+  background: linear-gradient(to bottom, rgba(220, 53, 69, 0) 0%, rgba(220, 53, 69, 0.3) 30%);
+  color: #fff;
+  margin-left: 0.5rem;
+}
+
+  .pl-positive { color: #28a745; }
+  .pl-negative { color: #dc3545; }
+  .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background-color: #29d; width: 0; z-index: 1031; transition: width 30s linear; }
+  #toggleTheme { position: fixed; top: 10px; right: 10px; z-index: 1050; }
+</style>
+</head>
+<body>
+<div class="progress-bar"></div>
+<button id="toggleTheme" class="btn btn-sm btn-secondary">Toggle Theme</button>
+<div class="container py-4">
+  <h2 class="mb-4 text-center">Crypto Signals Dashboard</h2>
+  <div class="row mb-3 g-2">
+    <div class="col-md-4"><input type="text" id="search" class="form-control" placeholder="Search symbol or signal type..." /></div>
+    <div class="col-md-4">
+      <select id="filterSignal" class="form-select"><option value="">All Signal Types</option></select>
     </div>
+    <div class="col-md-4">
+      <select id="sortOption" class="form-select">
+        <option value="datetime">Sort By Time (default)</option>
+        <option value="entry">Entry Price</option>
+      </select>
+    </div>
+  </div>
+  <div id="cards" class="row"></div>
+</div>
 
-    <script>
-      const JSON_URL = "https://msadeqian.github.io/jd/sg.json"; // local JSON file
-      let signalsData = [];
+<script>
+const JSON_URL = "https://msadeqian.github.io/jd/sg.json";
+let signalsData = [];
 
-      // Format datetime
-      function formatDate(ms) {
-        const d = new Date(ms);
-        return d.toLocaleString();
-      }
+// Load theme from localStorage
+let theme = localStorage.getItem('theme') || 'dark';
+document.body.classList.toggle('light-theme', theme === 'light');
 
-      // Fetch live price from custom API
-      async function fetchPrice(symbol) {
-        try {
-          const res = await fetch(`https://tg-poster.boyfromhell.workers.dev/?action=getSymbolPrice&symbol=${symbol}`);
-          const data = await res.json();
-          return parseFloat(data.price).toFixed(6);
-        } catch (e) {
-          return "N/A";
-        }
-      }
+document.getElementById("toggleTheme").addEventListener("click", () => {
+  theme = theme === 'dark' ? 'light' : 'dark';
+  document.body.classList.toggle('light-theme', theme === 'light');
+  localStorage.setItem('theme', theme);
+  renderCards(signalsData);
+});
 
-      // Render all cards
-      async function renderCards(data) {
-        const cardsContainer = document.getElementById("cards");
-        cardsContainer.innerHTML = "";
-        for (const d of data) {
-          const card = document.createElement("div");
-          card.className = "col-sm-12 col-md-6 col-lg-3";
-          const symbolColor = d.signal === "BUY" ? "text-success" : d.signal === "SELL" ? "text-danger" : "text-light";
+function formatDate(ms) { const d = new Date(ms); return d.toLocaleString(); }
 
-          card.innerHTML = `<div class="card bg-dark text-light p-3 mb-3">
-      <h5 class="${symbolColor}">${d.symbol}</h5>
-      <p class="card-text mb-1"><strong>Signal:</strong> ${d.signal}</p>
+async function fetchPrice(symbol) {
+  try {
+    const res = await fetch(`https://tg-poster.boyfromhell.workers.dev/?action=getSymbolPrice&symbol=${symbol}`);
+    const data = await res.json();
+    return parseFloat(data.price).toFixed(6);
+  } catch (e) { return "N/A"; }
+}
+
+function calcPL(signalType, entry, current) {
+  if (current === "N/A") return { text: "N/A", class: "" };
+  const cur = parseFloat(current);
+  let pl = 0, isPositive = false;
+  if (signalType === "BUY") { pl = ((cur - entry)/entry)*100; isPositive = cur >= entry; }
+  else if (signalType === "SELL") { pl = ((entry - cur)/entry)*100; isPositive = cur <= entry; }
+  return { text: `${isPositive ? "▲" : "▼"} ${pl.toFixed(2)}%`, class: isPositive ? "pl-positive" : "pl-negative" };
+}
+
+async function renderCards(data) {
+  const cardsContainer = document.getElementById("cards");
+  cardsContainer.innerHTML = "";
+  for (const d of data) {
+    const card = document.createElement("div");
+    card.className = "col-sm-12 col-md-6 col-lg-3";
+    const borderColor = d.signal === "BUY" ? "#28a745" : d.signal === "SELL" ? "#dc3545" : "transparent";
+    const badgeClass = d.signal === "BUY" ? "badge-buy" : d.signal === "SELL" ? "badge-sell" : "";
+    const cardBgClass = theme === 'dark' ? 'card-dark' : 'card-light';
+
+    card.innerHTML = `<div class="card ${cardBgClass} p-3 mb-3" style="border-left:5px solid ${borderColor};">
+      <h5>${d.symbol} <span class="${badgeClass}">${d.signal}</span></h5>
       <p class="card-text mb-1"><strong>Time:</strong> <small>${formatDate(d.datetime)}</small></p>
-      <p class="card-text mb-1"><strong>Entry:</strong> ${d.entry}</p>      
-      <p class="card-text mb-1"><strong>Market Direction:</strong> ${d.Market_Direction}</p>
-      <p class="card-text mb-1"><strong>Current Price:</strong> <span id="price-${d.symbol}" class="price">Loading...</span></p>
+      <p class="card-text mb-1"><strong>Entry:</strong> ${d.entry}</p>
+      <p class="card-text mb-1"><strong>Current Price:</strong> <span id="price-${d.symbol}" class="price">Loading...</span> <span id="pl-${d.symbol}" class="price"></span></p>
       <a href="${d.url}" target="_blank" class="btn btn-primary btn-sm mt-2">View Chart</a>
-      </div>`;
-          cardsContainer.appendChild(card);
+    </div>`;
+    cardsContainer.appendChild(card);
 
-          // fetch and update live price
-          fetchPrice(d.symbol).then((price) => {
-            const el = document.getElementById(`price-${d.symbol}`);
-            if (el) el.textContent = price;
-          });
-        }
+    fetchPrice(d.symbol).then(price => {
+      const el = document.getElementById(`price-${d.symbol}`);
+      const plEl = document.getElementById(`pl-${d.symbol}`);
+      if(el) el.textContent = price;
+      if(plEl){
+        const pl = calcPL(d.signal, d.entry, price);
+        plEl.textContent = pl.text;
+        plEl.className = `price ${pl.class}`;
       }
+    });
+  }
+}
 
-      // Auto-update prices every 30 seconds
-      function autoUpdatePrices() {
-        signalsData.forEach((d) => {
-          fetchPrice(d.symbol).then((price) => {
-            const el = document.getElementById(`price-${d.symbol}`);
-            if (el) el.textContent = price;
-          });
-        });
-        setTimeout(autoUpdatePrices, 30000);
+function autoUpdatePrices() {
+  signalsData.forEach(d => {
+    fetchPrice(d.symbol).then(price => {
+      const el = document.getElementById(`price-${d.symbol}`);
+      const plEl = document.getElementById(`pl-${d.symbol}`);
+      if(el) el.textContent = price;
+      if(plEl){
+        const pl = calcPL(d.signal, d.entry, price);
+        plEl.textContent = pl.text;
+        plEl.className = `price ${pl.class}`;
       }
+    });
+  });
+  setTimeout(autoUpdatePrices, 30000);
+}
 
-      // Filter & sort
-      function filterAndSort() {
-        const searchQ = document.getElementById("search").value.toLowerCase();
-        const signalFilter = document.getElementById("filterSignal").value;
-        const sortBy = document.getElementById("sortOption").value;
-        let filtered = signalsData.filter((s) => {
-          return (s.symbol.toLowerCase().includes(searchQ) || s.signal.toLowerCase().includes(searchQ)) && (!signalFilter || s.signal === signalFilter);
-        });
-        if (sortBy) {
-          filtered.sort((b, a) => {
-            if (sortBy === "datetime") return a.datetime - b.datetime;
-            return a[sortBy] - b[sortBy];
-          });
-        }
-        renderCards(filtered);
-      }
+function filterAndSort() {
+  const searchQ = document.getElementById("search").value.toLowerCase();
+  const signalFilter = document.getElementById("filterSignal").value;
+  const sortBy = document.getElementById("sortOption").value;
+  let filtered = signalsData.filter(s => 
+    (s.symbol.toLowerCase().includes(searchQ) || s.signal.toLowerCase().includes(searchQ)) &&
+    (!signalFilter || s.signal === signalFilter)
+  );
+  // default: sort by time descending
+  if(sortBy === "entry") filtered.sort((a,b)=>a.entry-b.entry);
+  else filtered.sort((a,b)=>b.datetime-a.datetime);
+  renderCards(filtered);
+}
 
-      // Load JSON data
-      async function loadSignals() {
-        try {
-          //const res = await fetch(`https://api.jsonbin.io/v3/b/68a573ceae596e708fceca34/latest`, {
-          //  headers: { "X-Access-Key": "$2a$10$fz0OW/4nVjESNsh8xdfEneimMU22LWatJ2gQcMBoCsYPjV3fGjGVC" },
-          //});
+async function loadSignals() {
+  try {
+    const res = await fetch(JSON_URL);
+    const json = await res.json();
+    signalsData = json.data;
 
-          const res = await fetch(JSON_URL);
-          const json = await res.json();
-          signalsData = json.data;
+    const types = [...new Set(signalsData.map(d=>d.signal))];
+    const filterSelect = document.getElementById("filterSignal");
+    types.forEach(t=>{ let o=document.createElement("option"); o.value=t; o.text=t; filterSelect.add(o); });
 
-          // populate filter
-          const types = [...new Set(signalsData.map((d) => d.signal))];
-          const filterSelect = document.getElementById("filterSignal");
-          types.forEach((t) => {
-            let o = document.createElement("option");
-            o.value = t;
-            o.text = t;
-            filterSelect.add(o);
-          });
+    filterAndSort(); // default descending
+    autoUpdatePrices();
+  } catch(err){
+    console.error("Failed to load JSON:",err);
+    document.getElementById("cards").innerHTML = '<p class="text-center">Failed to load data. Check your internet connection.</p>';
+  }
+}
 
-          renderCards(signalsData);
-          autoUpdatePrices();
-        } catch (err) {
-          console.error("Failed to load JSON:", err);
-          document.getElementById("cards").innerHTML = '<p class="text-center">Failed to load data. Check your internet connection.</p>';
-        }
-      }
+document.getElementById("search").addEventListener("input",filterAndSort);
+document.getElementById("filterSignal").addEventListener("change",filterAndSort);
+document.getElementById("sortOption").addEventListener("change",filterAndSort);
 
-      // Progress bar
-      /*const progress = document.querySelector(".progress-bar");
-      function startProgress() {
-        progress.style.width = "0%";
-        progress.clientWidth; // reflow
-        progress.style.width = "100%";
-      }
-      startProgress();
-      setInterval(startProgress, 30000);
-      */
+loadSignals();
 
-      document.getElementById("search").addEventListener("input", filterAndSort);
-      document.getElementById("filterSignal").addEventListener("change", filterAndSort);
-      document.getElementById("sortOption").addEventListener("change", filterAndSort);
-
-      loadSignals();
-
-      // Register Service Worker
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker
-          .register("sw.js")
-          .then(() => console.log("SW registered"))
-          .catch(console.error);
-      }
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
-</html>
+if("serviceWorker" in navigator){
+  navigator.serviceWorker.register("sw.js").then(()=>console.log("SW registered")).catch(console.error);
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html
