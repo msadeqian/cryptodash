@@ -24,3 +24,35 @@ self.addEventListener('fetch', e=>{
         e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));
     }
 });
+
+self.addEventListener("push", function(event) {
+  let data = {};
+  try {
+    data = event.data.json();
+  } catch (e) {
+    console.error("Push event data error:", e);
+  }
+
+  const options = {
+    body: data.message || "Notification",
+  };
+
+  event.waitUntil(
+    self.registration.showNotification(data.title || "CryptoDash", options)
+  );
+
+  // اگر reload=true باشه بعد از کلیک ری‌لود کنه
+  if (data.reload) {
+    self.addEventListener("notificationclick", function(ev) {
+      ev.notification.close();
+      ev.waitUntil(
+        clients.matchAll({ type: "window", includeUncontrolled: true }).then(windowClients => {
+          for (const client of windowClients) {
+            client.navigate(client.url);
+            client.focus();
+          }
+        })
+      );
+    });
+  }
+});
