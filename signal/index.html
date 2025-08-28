@@ -116,13 +116,14 @@ async function renderCards(data) {
     card.className = "col-sm-12 col-md-6 col-lg-3";
     const borderColor = d.signal === "BUY" ? "#28a745" : d.signal === "SELL" ? "#dc3545" : "transparent";
     const badgeClass = d.signal === "BUY" ? "badge-buy" : d.signal === "SELL" ? "badge-sell" : "";
+    const marketClass = d.Market_Direction === "Bullish" ? "badge-buy" : d.signal === "Bearish" ? "badge-sell" : "";    
     const cardBgClass = theme === 'dark' ? 'card-dark' : 'card-light';
 
     card.innerHTML = `<div class="card ${cardBgClass} p-3 mb-3" style="border-left:5px solid ${borderColor};">
       <h5>${d.symbol} <span class="${badgeClass}">${d.signal}</span></h5>
       <p class="card-text mb-1"><strong>Time:</strong> <small>${formatDate(d.datetime)}</small></p>
       <p class="card-text mb-1"><strong>Entry:</strong> ${d.entry}</p>
-      <p class="card-text mb-1"><strong>Market Direction:</strong> ${d.Market_Direction}</p>
+      <p class="card-text mb-1"><strong>Market Direction:</strong> <span class="${marketClass}">${d.Market_Direction}</span></p>
       <p class="card-text mb-1"><strong>Current Price:</strong> <span id="price-${d.symbol}" class="price">Loading...</span> <span id="pl-${d.symbol}" class="price"></span></p>
       <a href="${d.url}" target="_blank" class="btn btn-primary btn-sm mt-2">View Chart</a>
     </div>`;
