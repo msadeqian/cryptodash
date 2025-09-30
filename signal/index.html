@@ -62,15 +62,18 @@
       .pl-negative {
         color: #dc3545;
       }
-      .progress-bar {
+      #overlay {
         position: fixed;
         top: 0;
         left: 0;
-        height: 3px;
-        background-color: #29d;
+        width: 100%;
+        height: 4px;
+      }
+      #progress {
+        height: 100%;
         width: 0;
-        z-index: 1031;
-        transition: width 30s linear;
+        background: #2196f3;
+        transition: width 1s linear;
       }
       #toggleTheme {
         position: fixed;
@@ -79,9 +82,30 @@
         z-index: 1050;
       }
     </style>
+    <script>
+      //refresh every 30 sec
+      const totalTime = 30;
+      let elapsed = 0;
+
+      function updateProgress() {
+        elapsed++;
+        const percent = (elapsed / totalTime) * 100;
+        document.getElementById("progress").style.width = percent + "%";
+        if (elapsed >= totalTime) {
+          //location.reload();
+          elapsed = 0;
+          document.getElementById("progress").style.width = "0%";
+          loadSignals();
+        }
+      }
+
+      window.onload = () => {
+        setInterval(updateProgress, 1000);
+      };
+    </script>
   </head>
   <body>
-    <div class="progress-bar"></div>
+    <div id="overlay"><div id="progress"></div></div>
     <button id="toggleTheme" class="btn btn-sm btn-secondary">Toggle Theme</button>
     <div class="container py-4">
       <h2 class="mb-4 text-center">Crypto Signals Dashboard</h2>
@@ -192,7 +216,7 @@
             }
           });
         });
-        setTimeout(autoUpdatePrices, 30000);
+        //setTimeout(autoUpdatePrices, 30000);
       }
 
       function filterAndSort() {
