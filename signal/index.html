@@ -184,8 +184,8 @@
       <h5>${d.symbol} <span class="${badgeClass}">${d.signal}</span></h5>
       <p class="card-text mb-1"><strong>Time   : </strong> <small>${formatDate(d.datetime)}</small></p>
       <p class="card-text mb-1"><strong>Entry  : </strong> ${d.entry}</p>
-      <p class="card-text mb-1"><strong>SL     : </strong> ${d.stop_loss}</p>
-      <p class="card-text mb-1"><strong>TP     : </strong> ${d.take_profit}</p>
+      <p class="card-text mb-1"><strong>SL     : </strong> ${d.stop_loss ?? ""}</p>
+      <p class="card-text mb-1"><strong>TP     : </strong> ${d.take_profit ?? ""}</p>
       <p class="card-text mb-1"><strong>Entry  : </strong> ${d.entry}</p>
       <p class="card-text mb-1"><strong>Market : </strong> ${d.Market_Direction}</p>
       <p class="card-text mb-1"><strong>Current Price:</strong> <span id="price-${d.symbol}" class="price">Loading...</span> <span id="pl-${d.symbol}" class="price"></span></p>
