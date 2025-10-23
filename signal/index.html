@@ -182,9 +182,12 @@
 
           card.innerHTML = `<div class="card ${cardBgClass} p-3 mb-3" style="border-left:5px solid ${borderColor};">
       <h5>${d.symbol} <span class="${badgeClass}">${d.signal}</span></h5>
-      <p class="card-text mb-1"><strong>Time:</strong> <small>${formatDate(d.datetime)}</small></p>
-      <p class="card-text mb-1"><strong>Entry:</strong> ${d.entry}</p>
-      <p class="card-text mb-1"><strong>Market Direction:</strong> ${d.Market_Direction}</p>
+      <p class="card-text mb-1"><strong>Time   : </strong> <small>${formatDate(d.datetime)}</small></p>
+      <p class="card-text mb-1"><strong>Entry  : </strong> ${d.entry}</p>
+      <p class="card-text mb-1"><strong>SL     : </strong> ${d.stop_loss}</p>
+      <p class="card-text mb-1"><strong>TP     : </strong> ${d.take_profit}</p>
+      <p class="card-text mb-1"><strong>Entry  : </strong> ${d.entry}</p>
+      <p class="card-text mb-1"><strong>Market : </strong> ${d.Market_Direction}</p>
       <p class="card-text mb-1"><strong>Current Price:</strong> <span id="price-${d.symbol}" class="price">Loading...</span> <span id="pl-${d.symbol}" class="price"></span></p>
       <a href="${d.url}" target="_blank" class="btn btn-primary btn-sm mt-2">View Chart</a>
     </div>`;
